@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Dev\RU\x64\Debug\RU.exe</FullPath>
+      <FullPath>C:\Dev\RU\Debug\RU.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
