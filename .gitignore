@@ -34,3 +34,4 @@
 #Visual Studio 
 *.opendb
 *Browse.
+*.vs/
