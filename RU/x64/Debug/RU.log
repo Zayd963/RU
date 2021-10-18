@@ -1,3 +1,8 @@
-﻿  Source.cpp
-C:\Dev\RU\RU\src\Timer.h(9,60): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+﻿  Engine.cpp
+C:\Dev\RU\RU\RU\Timer.h(9,60): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Renderer.cpp
+  Vector2.cpp
+  Source.cpp
+C:\Dev\RU\RU\RU\Timer.h(9,60): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
   RU.vcxproj -> C:\Dev\RU\Debug\RU.exe

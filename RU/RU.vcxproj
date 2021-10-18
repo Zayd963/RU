@@ -58,7 +58,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL2\SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2\SDL2_mixer-2.0.4\include;$(SolutionDir)SDL2\SDL2_image-2.0.5\include;$(SolutionDir)SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDL2\SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2\SDL2_mixer-2.0.4\include;$(SolutionDir)SDL2\SDL2_image-2.0.5\include;$(SolutionDir)SDL2\include;RU\RU\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -76,7 +76,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)SDL2\SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2\SDL2_mixer-2.0.4\include;$(SolutionDir)SDL2\SDL2_image-2.0.5\include;$(SolutionDir)SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)SDL2\SDL2_ttf-2.0.15\include;$(SolutionDir)SDL2\SDL2_mixer-2.0.4\include;$(SolutionDir)SDL2\SDL2_image-2.0.5\include;$(SolutionDir)SDL2\include;RU\RU\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -88,16 +88,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="RU\Engine.cpp" />
+    <ClCompile Include="RU\Renderer.cpp" />
+    <ClCompile Include="RU\Vector2.cpp" />
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="src\Engine.cpp" />
-    <ClCompile Include="src\Renderer.cpp" />
-    <ClCompile Include="src\Vector2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Engine.h" />
-    <ClInclude Include="src\Renderer.h" />
-    <ClInclude Include="src\Timer.h" />
-    <ClInclude Include="src\Vector2.h" />
+    <ClInclude Include="RU\Engine.h" />
+    <ClInclude Include="RU\Renderer.h" />
+    <ClInclude Include="RU\Timer.h" />
+    <ClInclude Include="RU\Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
