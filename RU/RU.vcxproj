@@ -88,16 +88,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="RU\Engine.cpp" />
-    <ClCompile Include="RU\Renderer.cpp" />
-    <ClCompile Include="RU\Vector2.cpp" />
+    <ClCompile Include="RU\Core\Engine.cpp" />
+    <ClCompile Include="RU\Core\Input.cpp" />
+    <ClCompile Include="RU\Core\Renderer.cpp" />
+    <ClCompile Include="RU\Math\Vector2.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RU\Engine.h" />
-    <ClInclude Include="RU\Renderer.h" />
-    <ClInclude Include="RU\Timer.h" />
-    <ClInclude Include="RU\Vector2.h" />
+    <ClInclude Include="RU\Core\Engine.h" />
+    <ClInclude Include="RU\Core\Input.h" />
+    <ClInclude Include="RU\Core\Renderer.h" />
+    <ClInclude Include="RU\Core\Timer.h" />
+    <ClInclude Include="RU\Math\Vector2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
