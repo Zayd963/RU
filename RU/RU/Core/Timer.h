@@ -6,7 +6,7 @@ public:
 	Timer() {};
 
 	float GetTimeInMilliseconds() { return (float)SDL_GetTicks(); }
-	float GetTimeInSeconds() { return GetTimeInMilliseconds() * 0.001; }
+	float GetTimeInSeconds() { return GetTimeInMilliseconds() * 0.001f; }
 	void SetDeltaTime()
 	{
 		float time = GetTimeInSeconds();

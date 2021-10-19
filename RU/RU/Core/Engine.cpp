@@ -29,23 +29,9 @@ bool Engine::Run()
 		Input::Get()->Listen();
 
 		isRunning = !Input::Get()->quit;
+		
+		
 
-		if (Input::Get()->isKeyDown(SDL_SCANCODE_SPACE))
-		{
-			std::cout << "Space pressed" << std::endl;
-		}
-
-		if (Input::Get()->isKeyHeld(SDL_SCANCODE_SPACE))
-		{
-			std::cout << "Space Held" << std::endl;
-		}
-
-		if (Input::Get()->isKeyUp(SDL_SCANCODE_SPACE))
-		{
-			std::cout << "Space Up" << std::endl;
-		}
-
-		ts.SetDeltaTime();
 		Renderer::Get()->Display();
 	}
 

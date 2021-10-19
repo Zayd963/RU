@@ -16,6 +16,8 @@ void Input::Listen()
 
 	memcpy(lastFrameKeys, currentFrameKeys, sizeof(Uint8) * SDL_NUM_SCANCODES);
 	memcpy(currentFrameKeys, SDL_GetKeyboardState(NULL), sizeof(Uint8) * SDL_NUM_SCANCODES);
+	lastMouseButton = currentMouseButtons;
+	currentMouseButtons = SDL_GetMouseState(&mouseX, &mouseY);
 }
 
 bool Input::isKeyDown(SDL_Scancode scancode)
@@ -39,9 +41,39 @@ bool Input::isKeyUp(SDL_Scancode scancode)
 	return false;
 }
 
+int Input::GetMouseX()
+{
+	return mouseX;
+}
+
+int Input::GetMouseY()
+{
+	return mouseY;
+}
+
+Vector2 Input::GetMousePosition()
+{
+	return Vector2((float)mouseX, (float)mouseY);
+}
+
+bool Input::isMouseDown(Uint32 button)
+{
+	return (!(lastMouseButton & button) && (currentMouseButtons & button));
+}
+
+bool Input::isMouseHeld(Uint32 button)
+{
+	return ((lastMouseButton & button) && (currentMouseButtons & button));
+}
+
+bool Input::isMouseUp(Uint32 button)
+{
+	return ((lastMouseButton & button) && ((currentMouseButtons & button) == 0));
+}
+
 Input::Input()
 {
-	for (int i = 0; i <= SDL_NUM_SCANCODES; i++)
+	for (int i = 0; i <= SDL_NUM_SCANCODES - 1; i++)
 	{
 		lastFrameKeys[i] = 0;
 	}
