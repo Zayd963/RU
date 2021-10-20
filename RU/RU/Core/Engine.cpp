@@ -1,6 +1,10 @@
 #include "Engine.h"
 #include "Renderer.h"
 #include "Input.h"
+#include "../Scene/Scene.h"
+#include "../GameObject/GameObject.h"
+#include "../GameObject/DynamicGameObject.h"
+#include <memory>
 Engine* Engine::instance = nullptr;
 
 bool Engine::Init()
@@ -23,15 +27,22 @@ bool Engine::Init()
 bool Engine::Run()
 {
 	Timer ts;
+	Scene scene;
+
+	std::shared_ptr<DynamicGameObject> obj = std::make_shared<DynamicGameObject>();
+	scene.vecGameObjects.emplace_back(obj);
 
 	while (isRunning)
 	{
 		Input::Get()->Listen();
-
 		isRunning = !Input::Get()->quit;
-		
-		
+		ts.SetDeltaTime();
 
+
+		scene.Update(ts.GetDeltaTime());
+
+		Renderer::Get()->ClearScreen();
+		scene.Draw();
 		Renderer::Get()->Display();
 	}
 

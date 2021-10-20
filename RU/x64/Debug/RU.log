@@ -1,3 +1,4 @@
 ﻿  Engine.cpp
-C:\Dev\RU\RU\RU\Core\Timer.h(9,60): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+  DynamicGameObject.cpp
+  Generating Code...
   RU.vcxproj -> C:\Dev\RU\Debug\RU.exe
