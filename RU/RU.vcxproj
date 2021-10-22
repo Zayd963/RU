@@ -88,6 +88,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="RU\Physics\PhysicsWorld.cpp" />
+    <ClCompile Include="RU\Physics\RigidBody.cpp" />
     <ClCompile Include="RU\GameObject\DynamicGameObject.cpp" />
     <ClCompile Include="RU\GameObject\GameObject.cpp" />
     <ClCompile Include="RU\Core\Engine.cpp" />
@@ -96,8 +98,11 @@
     <ClCompile Include="RU\Math\Vector2.cpp" />
     <ClCompile Include="RU\Scene\Scene.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="RU\Core\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RU\Physics\PhysicsWorld.h" />
+    <ClInclude Include="RU\Physics\RigidBody.h" />
     <ClInclude Include="RU\GameObject\DynamicGameObject.h" />
     <ClInclude Include="RU\GameObject\GameObject.h" />
     <ClInclude Include="RU\Core\Engine.h" />
@@ -106,6 +111,7 @@
     <ClInclude Include="RU\Core\Timer.h" />
     <ClInclude Include="RU\Math\Vector2.h" />
     <ClInclude Include="RU\Scene\Scene.h" />
+    <ClInclude Include="RU\Core\Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

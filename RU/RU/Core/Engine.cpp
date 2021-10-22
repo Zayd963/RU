@@ -29,8 +29,18 @@ bool Engine::Run()
 	Timer ts;
 	Scene scene;
 
-	std::shared_ptr<DynamicGameObject> obj = std::make_shared<DynamicGameObject>();
-	scene.vecGameObjects.emplace_back(obj);
+	for (int i = 0; i < 11; i++)
+	{
+		std::shared_ptr<DynamicGameObject> temp = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/DefaultTexture.png");
+		temp->GetRigidbody()->position.x = i * 100;
+		temp->GetRigidbody()->position.y = 0;
+		scene.vecGameObjects.emplace_back(temp);
+	}
+
+	std::shared_ptr<DynamicGameObject> player = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/Tex.png");
+	player->GetRigidbody()->position.x = 368;
+	player->GetRigidbody()->position.y = 320;
+	scene.vecGameObjects.push_back(player);
 
 	while (isRunning)
 	{
@@ -38,6 +48,8 @@ bool Engine::Run()
 		isRunning = !Input::Get()->quit;
 		ts.SetDeltaTime();
 
+		Vector2 vec = Input::Get()->GetMousePosition();
+		std::cout << vec.x << " " << vec.y << std::endl;
 
 		scene.Update(ts.GetDeltaTime());
 

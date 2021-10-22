@@ -35,3 +35,13 @@ Vector2 Vector2::operator/(const float& rhs)
 {
 	return Vector2(this->x / rhs, this->y / rhs);
 }
+
+Vector2 Vector2::operator+=(const Vector2& rhs)
+{
+	this->x += rhs.x; this->y += rhs.y; return *this;
+}
+
+Vector2 Vector2::operator-=(const Vector2& rhs)
+{
+	this->x -= rhs.x; this->y -= rhs.y; return *this;
+}

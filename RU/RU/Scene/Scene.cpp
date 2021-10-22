@@ -2,6 +2,8 @@
 
 void Scene::Update(float deltaTime)
 {
+	PhysicsWorld::Get()->Update(deltaTime);
+
 	for(auto gameObject : vecGameObjects)
 	{
 		gameObject->Update(deltaTime);

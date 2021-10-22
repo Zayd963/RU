@@ -2,7 +2,7 @@
 #include <vector>
 #include <memory>
 #include "../GameObject/GameObject.h"
-
+#include "../Physics/PhysicsWorld.h"
 class Scene
 {
 public:

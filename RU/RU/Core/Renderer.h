@@ -7,7 +7,7 @@ public:
 	static Renderer* Get() { return instance = (instance != nullptr) ? instance : instance = new Renderer(); }
 	
 	void ClearScreen();
-	void Render(SDL_Texture* texture, SDL_Rect src, SDL_Rect dst);
+	void Render(SDL_Texture* texture, SDL_Rect src, SDL_Rect dst, double angle, SDL_RendererFlip flip);
 	void Display();
 	SDL_Texture* LoadTexture(const char* filepath);
 	inline SDL_Window* GetWindow() { return window; }
