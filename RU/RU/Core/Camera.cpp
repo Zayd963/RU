@@ -59,5 +59,5 @@ Vector2 Camera::ScreenToWorld(Vector2 pos)
 
 Vector2 Camera::WorldToScreen(Vector2 pos)
 {
-	return Vector2((pos.x + offset.x) * scale.x, (pos.y + offset.y) * scale.y);
+	return Vector2((pos.x - offset.x) * scale.x, (pos.y - offset.y) * scale.y);
 }

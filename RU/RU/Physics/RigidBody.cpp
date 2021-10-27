@@ -23,6 +23,8 @@ RigidBody::RigidBody()
 	Vector2 d1 = { -halfExtent, halfExtent };
 	pointsInBodyTransformed.emplace_back(d);
 
+	mass = halfExtent * 5;
+
 }
 
 RigidBody::RigidBody(float he)
@@ -46,6 +48,8 @@ RigidBody::RigidBody(float he)
 	pointsInBodyTransformed.emplace_back(c);
 	Vector2 d1 = { -halfExtent, halfExtent };
 	pointsInBodyTransformed.emplace_back(d);
+
+	mass = halfExtent * 5;
 }
 
 void RigidBody::Update(float deltaTime)
@@ -57,8 +61,9 @@ void RigidBody::Update(float deltaTime)
 	acceleration = (velocity * -1) * 0.8f;
 	velocity += acceleration * deltaTime;
 	position += velocity * deltaTime;
-	angle += 90 * deltaTime;
-	float radAngle = angle * (3.14159f / 180.f);
+	velocity.Normalize();
+	angle = atan2f(velocity.y, velocity.x);
+	float radAngle = angle;
 
 	for (int i = 0; i < pointsInBodyTransformed.size(); i++)
 	{

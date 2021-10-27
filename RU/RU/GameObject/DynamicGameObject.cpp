@@ -75,7 +75,7 @@ void DynamicGameObject::Draw(std::shared_ptr<Camera> cam)
 
 	
 
-	Renderer::Get()->Render(texture->GetTexture(), srcRect, dstRect, body->angle, SDL_FLIP_NONE);
+	Renderer::Get()->Render(texture->GetTexture(), srcRect, dstRect, body->angle * (180 / 3.14), SDL_FLIP_NONE);
 	SDL_SetRenderDrawColor(Renderer::Get()->GetRenderer(), 255, 255, 255, SDL_ALPHA_OPAQUE);
 	
 	
@@ -86,6 +86,14 @@ void DynamicGameObject::Draw(std::shared_ptr<Camera> cam)
 			(body->pointsInBodyTransformed[i].y - cam->offset.y) * cam->scale.y,
 			(body->pointsInBodyTransformed[(i + 1) % body->pointsInBodyTransformed.size()].x - cam->offset.x) * cam->scale.x,
 			(body->pointsInBodyTransformed[(i + 1) % body->pointsInBodyTransformed.size()].y - cam->offset.y) * cam->scale.y);
+	}
+
+	if (selected)
+	{
+		Vector2 mousePos = { 0, 0 };
+		mousePos = cam->ScreenToWorld(Input::Get()->GetMousePosition());
+		SDL_RenderDrawLine(Renderer::Get()->GetRenderer(), (body->position.x - cam->offset.x) * cam->scale.x, (body->position.y - cam->offset.y) * cam->scale.y,
+			(mousePos.x - cam->offset.x) * cam->scale.x, (mousePos.y - cam->offset.y) * cam->scale.y);
 	}
 	
 	

@@ -1,20 +1,2 @@
-﻿  DynamicGameObject.cpp
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(17,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(18,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(32,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(33,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(47,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(48,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(55,59): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(55,59): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(55,95): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(55,95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(70,68): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(71,68): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(73,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(74,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(88,102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(87,102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(86,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(85,107): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+﻿  PhysicsWorld.cpp
   RU.vcxproj -> C:\Dev\RU\Debug\RU.exe
