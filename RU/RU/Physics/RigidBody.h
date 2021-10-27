@@ -1,5 +1,6 @@
 #pragma once
 #include "../Math/Vector2.h"
+#include <vector>
 class RigidBody
 {
 public:
@@ -9,9 +10,11 @@ public:
 	void Update(float deltaTime);
 
 	float halfExtent;
-	double angle;
+	float angle;
 	Vector2 position;
 	Vector2 velocity;
 	Vector2 acceleration;
+	std::vector<Vector2> pointsInBody;
+	std::vector<Vector2> pointsInBodyTransformed;
 };
 

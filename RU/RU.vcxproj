@@ -88,6 +88,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="RU\Core\Camera.cpp" />
     <ClCompile Include="RU\Physics\PhysicsWorld.cpp" />
     <ClCompile Include="RU\Physics\RigidBody.cpp" />
     <ClCompile Include="RU\GameObject\DynamicGameObject.cpp" />
@@ -101,6 +102,7 @@
     <ClCompile Include="RU\Core\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RU\Core\Camera.h" />
     <ClInclude Include="RU\Physics\PhysicsWorld.h" />
     <ClInclude Include="RU\Physics\RigidBody.h" />
     <ClInclude Include="RU\GameObject\DynamicGameObject.h" />

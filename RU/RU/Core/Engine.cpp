@@ -27,9 +27,10 @@ bool Engine::Init()
 bool Engine::Run()
 {
 	Timer ts;
-	Scene scene;
+	std::shared_ptr<Camera> camera = std::make_shared<Camera>();
+	Scene scene(camera);
 
-	for (int i = 0; i < 11; i++)
+	for (int i = 0; i < 10; i++)
 	{
 		std::shared_ptr<DynamicGameObject> temp = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/DefaultTexture.png");
 		temp->GetRigidbody()->position.x = i * 100;
@@ -49,12 +50,14 @@ bool Engine::Run()
 		ts.SetDeltaTime();
 
 		Vector2 vec = Input::Get()->GetMousePosition();
-		std::cout << vec.x << " " << vec.y << std::endl;
 
 		scene.Update(ts.GetDeltaTime());
 
+		std::cout << 20 % 21 << std::endl;
+
 		Renderer::Get()->ClearScreen();
 		scene.Draw();
+		
 		Renderer::Get()->Display();
 	}
 

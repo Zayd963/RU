@@ -1,6 +1,8 @@
 #pragma once
 #include <SDL.h>
 #include "../Math/Vector2.h"
+#include <memory>
+#include "Camera.h"
 class Input
 {
 public:
@@ -9,12 +11,17 @@ public:
 	bool isKeyDown(SDL_Scancode scancode);
 	bool isKeyHeld(SDL_Scancode scancode);
 	bool isKeyUp(SDL_Scancode scancode);
+	bool isKey(SDL_Scancode scancode);
 	int GetMouseX();
 	int GetMouseY();
 	Vector2 GetMousePosition();
 	bool isMouseDown(Uint32 button);
 	bool isMouseHeld(Uint32 button);
 	bool isMouseUp(Uint32 button);
+	bool isMouse(Uint32 button);
+	
+	bool MouseWheelUp = false;
+	bool MouseWheelDown = false;
 
 	bool quit = false;
 protected:

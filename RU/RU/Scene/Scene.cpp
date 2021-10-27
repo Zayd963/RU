@@ -2,6 +2,8 @@
 
 void Scene::Update(float deltaTime)
 {
+	camera->Update(deltaTime);
+
 	PhysicsWorld::Get()->Update(deltaTime);
 
 	for(auto gameObject : vecGameObjects)
@@ -14,6 +16,6 @@ void Scene::Draw()
 {
 	for (auto gameObject : vecGameObjects)
 	{
-		gameObject->Draw();
+		gameObject->Draw(camera);
 	}
 }

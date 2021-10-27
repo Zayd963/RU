@@ -1,16 +1,18 @@
 #pragma once
 #include <vector>
 #include "RigidBody.h"
+#include <memory>
 class PhysicsWorld
 {
 public:
 	static PhysicsWorld* Get() { return instance = (instance != nullptr) ? instance : new PhysicsWorld(); }
 
-	void PushBodyToWorld(RigidBody* rb) { vecRigidbody.emplace_back(rb); }
+	void PushBodyToWorld(std::shared_ptr<RigidBody> rb) { vecRigidbody.emplace_back(rb); }
 
 	void Update(float deltaTime);
 	
-	std::vector<RigidBody*> vecRigidbody;
+	void StaticCollision(std::shared_ptr<RigidBody> body1, std::shared_ptr<RigidBody> body2);
+	std::vector<std::shared_ptr<RigidBody>> vecRigidbody;
 protected:
 	PhysicsWorld() {};
 

@@ -6,7 +6,7 @@ Renderer* Renderer::instance = nullptr;
 Renderer::Renderer()
 {
 	window = SDL_CreateWindow("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-		1280, 720, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+		640, 480, SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
 
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 }

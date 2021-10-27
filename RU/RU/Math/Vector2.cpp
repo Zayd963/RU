@@ -10,6 +10,19 @@ float Vector2::Mag()
 	return sqrtf(x * x + y * y);
 }
 
+void Vector2::RotateZ(Vector2 origin, float degrees)
+{
+	
+	float cos = cosf(degrees);
+	float sin = sinf(degrees);
+
+	float px = (x * cos - y * sin) - origin.x;
+	float py = (x * sin + y * cos) - origin.y;
+
+	x = px;
+	y = py;
+}
+
 Vector2 Vector2::Normalize()
 {
 	float r = 1 / Mag();
