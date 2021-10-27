@@ -3,7 +3,7 @@
 #include "Renderer.h"
 #include <iostream>
 Camera::Camera()
-	:offset({ 0, 0 })
+	:offset({ 0, 0 }), scale({1, 1})
 {
 	offset = { -320, -240 };
 }

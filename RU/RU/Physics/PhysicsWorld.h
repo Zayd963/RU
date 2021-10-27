@@ -11,8 +11,11 @@ public:
 
 	void Update(float deltaTime);
 	
-	void StaticCollision(std::shared_ptr<RigidBody> body1, std::shared_ptr<RigidBody> body2);
+	bool StaticCollision(std::shared_ptr<RigidBody> r1, std::shared_ptr<RigidBody> r2);
+	void DynamicResponse();
 	std::vector<std::shared_ptr<RigidBody>> vecRigidbody;
+	std::vector<std::pair<std::shared_ptr<RigidBody>, std::shared_ptr<RigidBody>>> vecCollidingBodies;
+	bool isCollision = false;
 protected:
 	PhysicsWorld() {};
 

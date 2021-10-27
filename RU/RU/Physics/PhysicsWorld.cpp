@@ -5,57 +5,112 @@ PhysicsWorld* PhysicsWorld::instance = nullptr;
 
 void PhysicsWorld::Update(float deltaTime)
 {
-	
-	for (auto body1 : vecRigidbody)
+	vecCollidingBodies.clear();
+	for (int i = 0; i < vecRigidbody.size(); i++)
 	{
-		for (auto body2 : vecRigidbody)
+		for (int j = 1 + i; j < vecRigidbody.size(); j++)
 		{
-			StaticCollision(body1, body2);
+			if (StaticCollision(vecRigidbody[i], vecRigidbody[j]))
+			{
+				vecCollidingBodies.push_back({ vecRigidbody[i] , vecRigidbody[j] });
+			}
 		}
+	}
+	//StaticCollision();
+
+	std::cout << isCollision << std::endl;
+
+	DynamicResponse();
+	
+
+	for (auto body : vecRigidbody)
+	{
+		body->Update(deltaTime);
 	}
 }
 
-void PhysicsWorld::StaticCollision(std::shared_ptr<RigidBody> body1, std::shared_ptr<RigidBody> body2)
+bool PhysicsWorld::StaticCollision(std::shared_ptr<RigidBody> r1, std::shared_ptr<RigidBody> r2)
 {
-	std::shared_ptr<RigidBody> body = body1;
-	std::shared_ptr<RigidBody> target = body2;
-	for (int bodyIndex = 0; bodyIndex < 2; bodyIndex++)
+	std::shared_ptr<RigidBody> poly1 = r1;
+	std::shared_ptr<RigidBody> poly2 = r2;
+
+	float overlap = INFINITY;
+
+	for (int shape = 0; shape < 2; shape++)
 	{
-		if (bodyIndex == 1)
+		if (shape == 1)
 		{
-			body = body2;
-			target = body1;
+			poly1 = r2;
+			poly2 = r1;
 		}
 
-		
-		for (int p = 0; p < body->pointsInBodyTransformed.size(); p++)
+		for (int a = 0; a < poly1->pointsInBodyTransformed.size(); a++)
 		{
-			Vector2 bodyDiagStart = body->position;
-			Vector2 bodyDiagEnd = body->pointsInBodyTransformed[p];
+			int b = (a + 1) % poly1->pointsInBodyTransformed.size();
+			Vector2 axisProj = { -(poly1->pointsInBodyTransformed[b].y - poly1->pointsInBodyTransformed[a].y), poly1->pointsInBodyTransformed[b].x - poly1->pointsInBodyTransformed[a].x };
+			float d = sqrtf(axisProj.x * axisProj.x + axisProj.y * axisProj.y);
+			axisProj = { axisProj.x / d, axisProj.y / d };
 
-			Vector2 displacement = { 0,0 };
-			
-			for (int q = 0; q < target->pointsInBodyTransformed.size(); q++)
+			// Work out min and max 1D points for r1
+			float min_r1 = INFINITY, max_r1 = -INFINITY;
+			for (int p = 0; p < poly1->pointsInBodyTransformed.size(); p++)
 			{
-				Vector2 targetEdgeStart = target->pointsInBodyTransformed[q];
-				Vector2 targetEdgeEnd = target->pointsInBodyTransformed[(q + 1) % target->pointsInBodyTransformed.size()];
-
-				
-				float h = (targetEdgeEnd.x - targetEdgeStart.x) * (bodyDiagStart.y - bodyDiagEnd.y) - (bodyDiagStart.x - bodyDiagEnd.x) * (targetEdgeEnd.y - targetEdgeStart.y);
-				float t1 = ((targetEdgeStart.y - targetEdgeEnd.y) * (bodyDiagStart.x - targetEdgeStart.x) + (targetEdgeEnd.x - targetEdgeStart.x) * (bodyDiagStart.y - targetEdgeStart.y)) / h;
-				float t2 = ((bodyDiagStart.y - bodyDiagEnd.y) * (bodyDiagStart.x - targetEdgeStart.x) + (bodyDiagEnd.x - bodyDiagStart.x) * (bodyDiagStart.y - targetEdgeStart.y)) / h;
-
-				if (t1 >= 0.0f && t1 < 1.0f && t2 >= 0.0f && t2 < 1.0f)
-				{
-					displacement.x += (1.0f - t1) * (bodyDiagEnd.x - bodyDiagStart.x);
-					displacement.y += (1.0f - t1) * (bodyDiagEnd.y - bodyDiagStart.y);
-				}
+				float q = (poly1->pointsInBodyTransformed[p].x * axisProj.x + poly1->pointsInBodyTransformed[p].y * axisProj.y);
+				min_r1 = std::min(min_r1, q);
+				max_r1 = std::max(max_r1, q);
 			}
-			body1->position.x += displacement.x * (bodyIndex == 0 ? -1 : +1);
-			body1->position.y += displacement.y * (bodyIndex == 0 ? -1 : +1);
+
+			// Work out min and max 1D points for r2
+			float min_r2 = INFINITY, max_r2 = -INFINITY;
+			for (int p = 0; p < poly2->pointsInBodyTransformed.size(); p++)
+			{
+				float q = (poly2->pointsInBodyTransformed[p].x * axisProj.x + poly2->pointsInBodyTransformed[p].y * axisProj.y);
+				min_r2 = std::min(min_r2, q);
+				max_r2 = std::max(max_r2, q);
+			}
+
+			overlap = std::min(std::min(max_r1, max_r2) - std::max(min_r1, min_r2), overlap);
+
+			if (!(max_r2 >= min_r1 && max_r1 >= min_r2))
+				return false;
 		}
 	}
+	Vector2 d = { r2->position.x - r1->position.x, r2->position.y - r1->position.y };	
+	float s = sqrtf(d.x * d.x + d.y * d.y);
+	r1->position.x -= overlap * d.x / s;
+	r1->position.y -= overlap * d.y / s;
+	return true;
+}
 
-	
+void PhysicsWorld::DynamicResponse()
+{
+	for (auto pair : vecCollidingBodies)
+	{
+		std::shared_ptr<RigidBody> ent1 = pair.first;
+		std::shared_ptr<RigidBody> ent2 = pair.second;
+
+		//Vector Between Entitys (ie normal)
+		Vector2 normal = (ent2->position - ent1->position).Normalize();
+		//Normal of normal (ie tangent)
+		Vector2 tangent = { -normal.y, normal.x };
+		//Dot product along tangent for ent1
+		float dotProductTangent1 = ent1->velocity.x * tangent.x + ent1->velocity.y * tangent.y;
+		//Dot product along tangent for ent2
+		float dotProductTangent2 = ent2->velocity.x * tangent.x + ent2->velocity.y * tangent.y;
+
+		// Dot Product along normal for ent1
+		float dotProductNormal1 = ent1->velocity.x * normal.x + ent1->velocity.y * normal.y;
+		// Dot Product along normal for ent2
+		float dotProductNormal2 = ent2->velocity.x * normal.x + ent2->velocity.y * normal.y;
+
+		// Conservation of momentum for ent1
+		float momentum1 = (dotProductNormal1 * (1 - 1) + 2.0f * 1 * dotProductNormal2) / (1 + 1);
+		// Conservation of momentum for ent2
+		float momentum2 = (dotProductNormal2 * (1 - 1) + 2.0f * 1 * dotProductNormal1) / (1 + 1);
+
+		// Update ent velocities
+		ent1->velocity = (tangent * dotProductTangent1) + (normal * momentum1);
+		ent2->velocity = (tangent * dotProductTangent2) + (normal * momentum2);
+	}
 	
 }

@@ -33,14 +33,16 @@ bool Engine::Run()
 	for (int i = 0; i < 10; i++)
 	{
 		std::shared_ptr<DynamicGameObject> temp = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/DefaultTexture.png");
-		temp->GetRigidbody()->position.x = i * 100;
+		temp->GetRigidbody()->position.x = i * 500;
 		temp->GetRigidbody()->position.y = 0;
+		temp->camera = camera;
 		scene.vecGameObjects.emplace_back(temp);
 	}
 
-	std::shared_ptr<DynamicGameObject> player = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/Tex.png");
+	std::shared_ptr<DynamicGameObject> player = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/Tex.png", 128);
 	player->GetRigidbody()->position.x = 368;
 	player->GetRigidbody()->position.y = 320;
+	player->camera = camera;
 	scene.vecGameObjects.push_back(player);
 
 	while (isRunning)
@@ -53,8 +55,8 @@ bool Engine::Run()
 
 		scene.Update(ts.GetDeltaTime());
 
-		std::cout << 20 % 21 << std::endl;
-
+		//std::cout << player->GetRigidbody()->position.x << " " << player->GetRigidbody()->position.y << std::endl;
+		//std::cout << PhysicsWorld::Get()->vecCollidingBodies.size() << std::endl;
 		Renderer::Get()->ClearScreen();
 		scene.Draw();
 		

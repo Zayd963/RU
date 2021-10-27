@@ -10,11 +10,12 @@ DynamicGameObject::DynamicGameObject()
 	srcRect.y = 0;
 	srcRect.w = texture->GetWidth();
 	srcRect.h = texture->GetHeight();
-	body = std::make_shared<RigidBody>(32.f);
+	scale = 0;
+	body = std::make_shared<RigidBody>(scale / 2);
 	dstRect.x = (int)body->position.x;
 	dstRect.y = (int)body->position.y;
-	dstRect.w = 64;
-	dstRect.h = 64;
+	dstRect.w = scale;
+	dstRect.h = scale;
 }
 
 DynamicGameObject::DynamicGameObject(const char* filepath)
@@ -24,18 +25,43 @@ DynamicGameObject::DynamicGameObject(const char* filepath)
 	srcRect.y = 0;
 	srcRect.w = texture->GetWidth();
 	srcRect.h = texture->GetHeight();
-	body = std::make_shared<RigidBody>(32.f);
+	scale = 64;
+	body = std::make_shared<RigidBody>(scale / 2);
 	dstRect.x = (int)body->position.x;
 	dstRect.y = (int)body->position.y;
-	dstRect.w = 64;
-	dstRect.h = 64;
+	dstRect.w = scale;
+	dstRect.h = scale;
+}
+
+DynamicGameObject::DynamicGameObject(const char* filepath, float _scale)
+{
+	texture = std::make_shared<Texture>(filepath);
+	srcRect.x = 0;
+	srcRect.y = 0;
+	srcRect.w = texture->GetWidth();
+	srcRect.h = texture->GetHeight();
+	scale = _scale;
+	body = std::make_shared<RigidBody>(scale / 2);
+	dstRect.x = (int)body->position.x;
+	dstRect.y = (int)body->position.y;
+	dstRect.w = scale;
+	dstRect.h = scale;
 }
 
 void DynamicGameObject::Update(float deltaTime)
 {
 	
-
-	body->Update(deltaTime);
+	Vector2 startMousePos = { 0, 0 };
+	SDL_Point mousePoint = { Input::Get()->GetMousePosition().x, Input::Get()->GetMousePosition().y };
+	if (SDL_PointInRect(&mousePoint, &dstRect) && Input::Get()->isMouseDown(SDL_BUTTON_LEFT))
+	{
+		selected = true;
+	}
+	if (Input::Get()->isMouseUp(SDL_BUTTON_LEFT) && selected)
+	{
+		body->velocity = (body->position - camera->ScreenToWorld(Input::Get()->GetMousePosition())) * 5;
+		selected = false;
+	}
 }
 
 void DynamicGameObject::Draw(std::shared_ptr<Camera> cam)
@@ -44,14 +70,10 @@ void DynamicGameObject::Draw(std::shared_ptr<Camera> cam)
 	dstRect.x = (body->position.x - body->halfExtent - cam->offset.x) * cam->scale.x;
 	dstRect.y = (body->position.y - body->halfExtent - cam->offset.y) * cam->scale.y;
 	
-	dstRect.w = 64 * cam->scale.x;
-	dstRect.h = 64 * cam->scale.y;
+	dstRect.w = scale * cam->scale.x;
+	dstRect.h = scale * cam->scale.y;
 
-	SDL_Point mousePoint = { Input::Get()->GetMousePosition().x, Input::Get()->GetMousePosition().y };
-	if (SDL_PointInRect(&mousePoint, &dstRect) && Input::Get()->isMouse(SDL_BUTTON_LEFT))
-	{
-		body->position = cam->ScreenToWorld(Input::Get()->GetMousePosition());
-	}
+	
 
 	Renderer::Get()->Render(texture->GetTexture(), srcRect, dstRect, body->angle, SDL_FLIP_NONE);
 	SDL_SetRenderDrawColor(Renderer::Get()->GetRenderer(), 255, 255, 255, SDL_ALPHA_OPAQUE);

@@ -54,9 +54,10 @@ void RigidBody::Update(float deltaTime)
 	//Vector2 gravity = { 0, 100 };
 	//acceleration = gravity + drag;
 
+	acceleration = (velocity * -1) * 0.8f;
 	velocity += acceleration * deltaTime;
 	position += velocity * deltaTime;
-	angle += 45 * deltaTime;
+	angle += 90 * deltaTime;
 	float radAngle = angle * (3.14159f / 180.f);
 
 	for (int i = 0; i < pointsInBodyTransformed.size(); i++)
