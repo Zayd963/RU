@@ -39,14 +39,14 @@ bool Engine::Run()
 		scene.vecGameObjects.emplace_back(temp);
 	}
 
-	/*std::shared_ptr<DynamicGameObject> player = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/Tex.png", 128);
+	std::shared_ptr<DynamicGameObject> player = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/Tex.png", 128);
 	player->GetRigidbody()->position.x = 368;
-	player->GetRigidbody()->position.y = 320;
+	player->GetRigidbody()->position.y = 0;
 	player->GetRigidbody()->mass = 1000;
 	player->GetRigidbody()->isStatic = false;
 	player->GetRigidbody()->bounciness = 1.f;
 	player->camera = camera;
-	scene.vecGameObjects.push_back(player);*/
+	scene.vecGameObjects.push_back(player);
 
 
 	
