@@ -30,7 +30,7 @@ bool Engine::Run()
 	std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 	Scene scene(camera);
 
-	for (int i = 0; i < 1; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		std::shared_ptr<DynamicGameObject> temp = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/DefaultTexture.png");
 		temp->GetRigidbody()->position.x = i * 250;
@@ -49,7 +49,7 @@ bool Engine::Run()
 	scene.vecGameObjects.push_back(player);*/
 
 
-	
+	bool go = false;
 
 	while (isRunning)
 	{
@@ -57,7 +57,11 @@ bool Engine::Run()
 		isRunning = !Input::Get()->quit;
 		ts.SetDeltaTime();
 
-		scene.Update(ts.GetDeltaTime());
+		if (Input::Get()->isKeyDown(SDL_SCANCODE_D))
+			go = !go;
+
+		if(go)
+			scene.Update(ts.GetDeltaTime());
 
 	
 

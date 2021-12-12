@@ -2,7 +2,7 @@
 #include "PhysicsWorld.h"
 #include <iostream>
 RigidBody::RigidBody()
-	:position({ 320, 240 }), velocity({ 500, 0 }), acceleration({ 0, 0 }), halfExtent(32), angle(0), isStatic(false), bounciness(1)
+	:position({ 320, 240 }), velocity({ 0, 0 }), acceleration({ 0, 0 }), halfExtent(32), angle(0), isStatic(false), bounciness(1)
 {
 	PhysicsWorld::Get()->PushBodyToWorld(std::shared_ptr<RigidBody>(this));
 	Vector2 a = { -halfExtent, - halfExtent };
@@ -28,7 +28,7 @@ RigidBody::RigidBody()
 }
 
 RigidBody::RigidBody(float he)
-	: position({ 320, 240 }), velocity({ 500, 0 }), acceleration({ 0, 0 }), halfExtent(he), angle(0), isStatic(false), bounciness(1)
+	: position({ 320, 240 }), velocity({ 0, 0 }), acceleration({ 0, 0 }), halfExtent(he), angle(0), isStatic(false), bounciness(1)
 {
 	PhysicsWorld::Get()->PushBodyToWorld(std::shared_ptr<RigidBody>(this));
 	Vector2 a = { -halfExtent, -halfExtent };
@@ -57,7 +57,7 @@ void RigidBody::Update(float deltaTime)
 	Vector2 drag = (velocity * -1) * 0.8f;
 	Vector2 gravity = { 0, 100 };
 	Vector2 Initial = { 50, 0 };
-	acceleration = gravity + drag;
+	acceleration = drag;
 
 	if (velocity.Mag() < 0.1)
 	{
