@@ -19,7 +19,7 @@ void Camera::Update(float deltaTime)
 	}
 	if (Input::Get()->isMouseHeld(SDL_BUTTON_RMASK))
 	{
-		offset -= (mousePos - startPan);
+		offset -= (mousePos - startPan) / scale.x;
 
 		startPan = mousePos;
 	}

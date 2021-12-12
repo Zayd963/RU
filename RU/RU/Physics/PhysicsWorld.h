@@ -16,6 +16,7 @@ public:
 	std::vector<std::shared_ptr<RigidBody>> vecRigidbody;
 	std::vector<std::pair<std::shared_ptr<RigidBody>, std::shared_ptr<RigidBody>>> vecCollidingBodies;
 	bool isCollision = false;
+	float col = 0;
 protected:
 	PhysicsWorld() {};
 
@@ -23,6 +24,6 @@ protected:
 
 private:
 	static PhysicsWorld* instance;
-	
+	bool go = false;
 };
 

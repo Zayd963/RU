@@ -12,9 +12,11 @@ public:
 	float halfExtent;
 	float angle;
 	float mass;
-	Vector2 position;
-	Vector2 velocity;
-	Vector2 acceleration;
+	float bounciness;
+	bool isStatic;
+	Vector2 position{ 0, 0 };
+	Vector2 velocity{ 0, 0 };
+	Vector2 acceleration{ 0, 0 };
 	std::vector<Vector2> pointsInBody;
 	std::vector<Vector2> pointsInBodyTransformed;
 };

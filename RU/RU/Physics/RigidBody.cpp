@@ -2,7 +2,7 @@
 #include "PhysicsWorld.h"
 #include <iostream>
 RigidBody::RigidBody()
-	:position({ 320, 240 }), velocity({ 0, 0 }), acceleration({ 0, 0 }), halfExtent(32), angle(0)
+	:position({ 320, 240 }), velocity({ 500, 0 }), acceleration({ 0, 0 }), halfExtent(32), angle(0), isStatic(false), bounciness(1)
 {
 	PhysicsWorld::Get()->PushBodyToWorld(std::shared_ptr<RigidBody>(this));
 	Vector2 a = { -halfExtent, - halfExtent };
@@ -28,7 +28,7 @@ RigidBody::RigidBody()
 }
 
 RigidBody::RigidBody(float he)
-	: position({ 320, 240 }), velocity({ 0, 0 }), acceleration({ 0, 0 }), halfExtent(he), angle(0)
+	: position({ 320, 240 }), velocity({ 500, 0 }), acceleration({ 0, 0 }), halfExtent(he), angle(0), isStatic(false), bounciness(1)
 {
 	PhysicsWorld::Get()->PushBodyToWorld(std::shared_ptr<RigidBody>(this));
 	Vector2 a = { -halfExtent, -halfExtent };
@@ -54,15 +54,22 @@ RigidBody::RigidBody(float he)
 
 void RigidBody::Update(float deltaTime)
 {
-	//Vector2 drag = (velocity * -1) * 0.8f;
-	//Vector2 gravity = { 0, 100 };
-	//acceleration = gravity + drag;
+	Vector2 drag = (velocity * -1) * 0.8f;
+	Vector2 gravity = { 0, 100 };
+	Vector2 Initial = { 50, 0 };
+	acceleration = gravity + drag;
 
-	acceleration = (velocity * -1) * 0.8f;
+	if (velocity.Mag() < 0.1)
+	{
+		velocity = { 0, 0 };
+	}
+
+	
 	velocity += acceleration * deltaTime;
 	position += velocity * deltaTime;
 	velocity.Normalize();
 	angle = atan2f(velocity.y, velocity.x);
+	//angle = 0;
 	float radAngle = angle;
 
 	for (int i = 0; i < pointsInBodyTransformed.size(); i++)
@@ -72,5 +79,7 @@ void RigidBody::Update(float deltaTime)
 		a.y = (pointsInBody[i].x * sinf(radAngle)) + (pointsInBody[i].y * cosf(radAngle)) + position.y;
 		pointsInBodyTransformed[i] = a;
 	}
+	
+
 	
 }

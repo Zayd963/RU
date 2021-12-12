@@ -1,10 +1,12 @@
 #include "PhysicsWorld.h"
 #include "../Core/Camera.h"
 #include <iostream>
+#include "../Core/Input.h"
 PhysicsWorld* PhysicsWorld::instance = nullptr;
 
 void PhysicsWorld::Update(float deltaTime)
 {
+	
 	vecCollidingBodies.clear();
 	for (int i = 0; i < vecRigidbody.size(); i++)
 	{
@@ -12,6 +14,8 @@ void PhysicsWorld::Update(float deltaTime)
 		{
 			if (StaticCollision(vecRigidbody[i], vecRigidbody[j]))
 			{
+				col += 1;
+				//std::cout << col << std::endl;
 				vecCollidingBodies.push_back({ vecRigidbody[i] , vecRigidbody[j] });
 			}
 		}
@@ -19,11 +23,13 @@ void PhysicsWorld::Update(float deltaTime)
 
 	DynamicResponse();
 	
-
+	
 	for (auto body : vecRigidbody)
 	{
 		body->Update(deltaTime);
 	}
+	
+	
 }
 
 bool PhysicsWorld::StaticCollision(std::shared_ptr<RigidBody> _body1, std::shared_ptr<RigidBody> _body2)
@@ -74,9 +80,12 @@ bool PhysicsWorld::StaticCollision(std::shared_ptr<RigidBody> _body1, std::share
 				return false;
 		}
 	}
-	Vector2 normal = _body2->position - _body1->position;
-	Vector2 normalNormalized = normal.Normalize();
-	_body1->position -= normalNormalized * overlap;
+	if (!_body1->isStatic)
+	{
+		Vector2 normal = _body2->position - _body1->position;
+		Vector2 normalNormalized = normal.Normalize();
+		_body1->position -= normalNormalized * overlap;
+	}
 	return true;
 }
 
@@ -86,7 +95,7 @@ void PhysicsWorld::DynamicResponse()
 	{
 		std::shared_ptr<RigidBody> body1 = pair.first;
 		std::shared_ptr<RigidBody> body2 = pair.second;
-
+		//Elastic Collision
 		//Vector Between Entitys (ie normal)
 		Vector2 normal = (body2->position - body1->position).Normalize();
 		//Normal of normal (ie tangent)
@@ -102,13 +111,44 @@ void PhysicsWorld::DynamicResponse()
 		float dotProductNormal2 = body2->velocity.x * normal.x + body2->velocity.y * normal.y;
 
 		// Conservation of momentum for ent1
-		float momentum1 = (dotProductNormal1 * (body1->mass - body2->mass) + 2.0f * body2->mass * dotProductNormal2) / (body1->mass + body2->mass);
+		float momentum1 = ((dotProductNormal1 * (body1->mass - body2->mass) + 2.0f * body2->mass * dotProductNormal2) / (body1->mass + body2->mass));
 		// Conservation of momentum for ent2
-		float momentum2 = (dotProductNormal2 * (body2->mass - body1->mass) + 2.0f * body1->mass * dotProductNormal1) / (body1->mass + body2->mass);
+		float momentum2 = ((dotProductNormal2 * (body2->mass - body1->mass) + 2.0f * body1->mass * dotProductNormal1) / (body1->mass + body2->mass));
 
-		// Update ent velocities
-		body1->velocity = (tangent * dotProductTangent1) + (normal * momentum1);
-		body2->velocity = (tangent * dotProductTangent2) + (normal * momentum2);
+
+		
+		
+		
+		if (!body1->isStatic)
+			body1->velocity = (tangent * dotProductTangent1) + (normal * momentum1);
+		if (!body2->isStatic)
+			body2->velocity = (tangent * dotProductTangent2) + (normal * momentum2);
+
+
+		//if (body2->isStatic)
+		//{
+		//	if(!body1->isStatic)
+		//		body1->velocity = (tangent * dotProductTangent1);
+		//}
+		//else
+		//{
+		//	if(!body1->isStatic)
+		//		body1->velocity = (tangent * dotProductTangent1) + (normal * momentum1);
+		//}
+
+
+
+		//if (body1->isStatic)
+		//{
+		//	if(!body2->isStatic)
+		//		body2->velocity = (tangent * dotProductTangent1);
+		//}
+		//else
+		//{
+		//	if(!body2->isStatic)
+		//		body2->velocity = (tangent * dotProductTangent2) + (normal * momentum2);
+		//}
+		
 	}
 	
 }

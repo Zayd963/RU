@@ -6,9 +6,12 @@ public:
 	
 	float Mag();
 	
+	//ToDo: Fix This Mess
 	void RotateZ(Vector2 origin, float degrees);
 	 
 	Vector2 Normalize();
+
+	float Dot(Vector2 vec);
 
 	Vector2 operator + (const Vector2& rhs);
 	Vector2 operator - (const Vector2& rhs);

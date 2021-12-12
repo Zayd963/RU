@@ -56,6 +56,7 @@ void DynamicGameObject::Update(float deltaTime)
 	if (SDL_PointInRect(&mousePoint, &dstRect) && Input::Get()->isMouseDown(SDL_BUTTON_LEFT))
 	{
 		selected = true;
+		body->velocity = {0, 0};
 	}
 	if (Input::Get()->isMouseUp(SDL_BUTTON_LEFT) && selected)
 	{
@@ -75,18 +76,22 @@ void DynamicGameObject::Draw(std::shared_ptr<Camera> cam)
 
 	
 
+	if (dstRect.y > 480 - dstRect.h)
+		dstRect.y = 480 - dstRect.h;
+
+	std::cout << dstRect.y << std::endl;
 	Renderer::Get()->Render(texture->GetTexture(), srcRect, dstRect, body->angle * (180 / 3.14), SDL_FLIP_NONE);
 	SDL_SetRenderDrawColor(Renderer::Get()->GetRenderer(), 255, 255, 255, SDL_ALPHA_OPAQUE);
 	
 	
 
-	for (int i = 0; i < body->pointsInBodyTransformed.size(); i++)
+	/*for (int i = 0; i < body->pointsInBodyTransformed.size(); i++)
 	{
 		SDL_RenderDrawLine(Renderer::Get()->GetRenderer(), (body->pointsInBodyTransformed[i].x - cam->offset.x) * cam->scale.x,
 			(body->pointsInBodyTransformed[i].y - cam->offset.y) * cam->scale.y,
 			(body->pointsInBodyTransformed[(i + 1) % body->pointsInBodyTransformed.size()].x - cam->offset.x) * cam->scale.x,
 			(body->pointsInBodyTransformed[(i + 1) % body->pointsInBodyTransformed.size()].y - cam->offset.y) * cam->scale.y);
-	}
+	}*/
 
 	if (selected)
 	{

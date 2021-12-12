@@ -29,6 +29,11 @@ Vector2 Vector2::Normalize()
 	return Vector2(x * r, y * r);
 }
 
+float Vector2::Dot(Vector2 vec)
+{
+	return ((x * vec.x) + (y * vec.y));
+}
+
 Vector2 Vector2::operator+(const Vector2 &rhs)
 {
 	return Vector2(this->x + rhs.x, this->y + rhs.y);

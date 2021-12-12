@@ -30,21 +30,23 @@ bool Engine::Run()
 	std::shared_ptr<Camera> camera = std::make_shared<Camera>();
 	Scene scene(camera);
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		std::shared_ptr<DynamicGameObject> temp = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/DefaultTexture.png");
-		temp->GetRigidbody()->position.x = i * 150;
+		temp->GetRigidbody()->position.x = i * 250;
 		temp->GetRigidbody()->position.y = 0;
 		temp->camera = camera;
 		scene.vecGameObjects.emplace_back(temp);
 	}
 
-	std::shared_ptr<DynamicGameObject> player = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/Tex.png", 128);
+	/*std::shared_ptr<DynamicGameObject> player = std::make_shared<DynamicGameObject>("C:/Dev/RU/RU/GFX/Tex.png", 128);
 	player->GetRigidbody()->position.x = 368;
 	player->GetRigidbody()->position.y = 320;
-	player->GetRigidbody()->mass = 10000.f;
+	player->GetRigidbody()->mass = 1000;
+	player->GetRigidbody()->isStatic = false;
+	player->GetRigidbody()->bounciness = 1.f;
 	player->camera = camera;
-	scene.vecGameObjects.push_back(player);
+	scene.vecGameObjects.push_back(player);*/
 
 
 	
@@ -56,6 +58,8 @@ bool Engine::Run()
 		ts.SetDeltaTime();
 
 		scene.Update(ts.GetDeltaTime());
+
+	
 
 		Renderer::Get()->ClearScreen();
 		scene.Draw();
@@ -69,6 +73,7 @@ bool Engine::Run()
 
 Engine::~Engine()
 {
+	delete instance;
 }
 
 Engine::Engine()
