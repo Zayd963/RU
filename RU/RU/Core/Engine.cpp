@@ -49,7 +49,7 @@ bool Engine::Run()
 	scene.vecGameObjects.push_back(player);
 
 
-	
+	bool go = false;
 
 	while (isRunning)
 	{
@@ -57,7 +57,11 @@ bool Engine::Run()
 		isRunning = !Input::Get()->quit;
 		ts.SetDeltaTime();
 
-		scene.Update(ts.GetDeltaTime());
+		if (Input::Get()->isKeyDown(SDL_SCANCODE_B))
+			go = !go;
+
+		if(go)
+			scene.Update(ts.GetDeltaTime());
 
 	
 

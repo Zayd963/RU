@@ -1,2 +1,49 @@
-﻿  RigidBody.cpp
+﻿  Engine.cpp
+C:\Dev\RU\RU\RU\Core\Engine.cpp(36,40): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include\xutility(158,77): warning C4244: 'argument': conversion from '_Ty' to 'float', possible loss of data
+          with
+          [
+              _Ty=int
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include\memory(2021): message : see reference to function template instantiation 'void std::_Construct_in_place<_Ty,const char(&)[25],int>(_Ty &,const char (&)[25],int &&) noexcept(false)' being compiled
+          with
+          [
+              _Ty=DynamicGameObject
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include\memory(2747): message : see reference to function template instantiation 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<const char(&)[25],int>(const char (&)[25],int &&)' being compiled
+          with
+          [
+              _Ty=DynamicGameObject
+          ]
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30037\include\memory(2748): message : see reference to function template instantiation 'std::_Ref_count_obj2<_Ty>::_Ref_count_obj2<const char(&)[25],int>(const char (&)[25],int &&)' being compiled
+          with
+          [
+              _Ty=DynamicGameObject
+          ]
+C:\Dev\RU\RU\RU\Core\Engine.cpp(42): message : see reference to function template instantiation 'std::shared_ptr<DynamicGameObject> std::make_shared<DynamicGameObject,const char(&)[25],int>(const char (&)[25],int &&)' being compiled
+  DynamicGameObject.cpp
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(17,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(18,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(32,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(33,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(47,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(48,14): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(55,59): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(55,59): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(55,95): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(55,95): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(71,68): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(72,68): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(74,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(75,20): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(92,102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(91,102): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(90,57): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(89,107): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(100,78): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(100,33): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(99,140): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+C:\Dev\RU\RU\RU\GameObject\DynamicGameObject.cpp(99,89): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+  Generating Code...
+  LINK : C:\Dev\RU\\Debug\RU.exe not found or not built by the last incremental link; performing full link
   RU.vcxproj -> C:\Dev\RU\Debug\RU.exe
